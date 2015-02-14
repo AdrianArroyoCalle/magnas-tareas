@@ -1,7 +1,7 @@
 # Magnas Tareas
 Magnas Tareas is a todo app inspired by [HaikuToDo](http://github.com/AdrianArroyoCalle/haiku-todo)
 
-The app is divided in a C++ core, an UI frontend and multiple tasks backends
+The app is divided in a C++ core, a GUI frontend and multiple tasks backends
 
 ## Platforms
 
