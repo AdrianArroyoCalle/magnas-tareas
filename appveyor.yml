@@ -1,0 +1,17 @@
+os: MinGW
+clone_depth: 1
+
+environment:
+ QTDIR: C:\Qt\5.4\mingw491_32
+ MINGW: C:\Qt\Tools\
+ 
+configuration: Release
+
+install:
+ - set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin;C:\Qt\Tools\QtCreator\bin
+ - choco install cmake
+ - nuget install sqlite3
+ 
+build_script:
+ - cmake -DCMAKE_PREFIX_PATH=%QTDIR%\lib\cmake .
+ - make
