@@ -10,7 +10,7 @@ configuration: Release
 install:
  - set PATH=%PATH%;%QTDIR%\bin;%MINGW%\bin;C:\Qt\Tools\QtCreator\bin
  - choco install cmake
- - nuget install sqlite3
+ - nuget install sqlite
  
 build_script:
  - cmake -DCMAKE_PREFIX_PATH=%QTDIR%\lib\cmake .
