@@ -4,6 +4,10 @@
 #include <QQuickItem>
 #include <QQmlContext>
 
+#ifdef WIN32
+#pragma comment(linker, "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+#endif
+
 QQuickItem* item;
 
 class MagnasTareasQt : public QObject
