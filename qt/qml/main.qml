@@ -25,7 +25,11 @@ ApplicationWindow {
 				text: control.text
 			}
 		}
-	} 
+	}
+
+	ListModel{
+		id: categoryModel
+	}
     
     ColumnLayout{
 		spacing: 6
@@ -77,16 +81,9 @@ ApplicationWindow {
 					font.pixelSize: 20
 				}
 				footer: Text{
-					text: "Categories: <b>" + tasks.count + "</b>" 
+					text: "Categories: <b>" + categories.count + "</b>" 
 				}
-				model: ListModel{
-					ListElement{
-						name: "Google Tasks"
-					}
-					ListElement{
-						name: "ALL"
-					}
-				}
+				model: categoryModel
 				delegate: Text {
 					text: name
 
@@ -182,5 +179,12 @@ ApplicationWindow {
 			}
 
 		}
+	}
+	function addVisualCategory(name,uuid){
+		console.log("Adding "+name)
+		categoryModel.append({"name": name, "uuid": uuid})
+	}
+	function refresh(){
+		MagnasTareas.getCategories()
 	}
 }
