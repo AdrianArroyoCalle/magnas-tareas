@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QQuickItem>
 #include <QQmlContext>
+#include "../core/MagnasTareas.hpp"
 
 #ifdef WIN32
 #pragma comment(linker, "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
@@ -10,7 +11,7 @@
 
 QQuickItem* item;
 
-class MagnasTareasQt : public QObject
+class MagnasTareasQt : public QObject, MagnasTareas
  {
      Q_OBJECT
  public slots:
@@ -24,6 +25,10 @@ class MagnasTareasQt : public QObject
 	QString readTask(const QString& uuid){
 			qDebug() << "UUID: " << uuid;
 			return "Contenido de la tarea, implementar un Core Universal que sea posible usar con muchos drivers de APIs REST"; 
+	}
+	QString getVersion(void)
+	{
+		return QString::fromStdString(this->GetVersion());
 	}
 		
  };
