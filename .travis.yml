@@ -3,11 +3,17 @@ compiler:
  - gcc
  - clang
 before_install:
- - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+ - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+ - sudo add-apt-repository --yes ppa:beineri/opt-qt54
  - sudo apt-get update
 install:
- - sudo apt-get install qtbase5-dev qtdeclarative5-dev libsqlite3-dev qt5-default qt5-qmake qttools5-dev qttools5-dev-tools
+ - sudo apt-get install g++-4.8 libc6-i386 qt54tools qt54declarative qt54quick1 qt54quickcontrols
+ - export CXX="g++-4.8"
+ - export CC="gcc-4.8"
+ - wget http://www.cmake.org/files/v3.1/cmake-3.1.0-Linux-i386.tar.gz
+ - tar -xzf cmake-3.1.0-Linux-i386.tar.gz
+ - sudo cp -fR cmake-3.1.0-Linux-i386/* /usr
 
 script:
- - cmake .
+ - cmake -DCMAKE_PREFIX_PATH=/opt/qt54/lib/cmake .
  - make
