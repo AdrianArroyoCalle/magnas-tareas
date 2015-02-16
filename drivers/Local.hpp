@@ -4,10 +4,13 @@
 
 #include "sqlite3.h"
 #include "../core/MagnasTareasDriver.hpp"
+#include <iostream>
 
 class LocalDriver : public MagnasTareasDriver {
 public:
-	LocalDriver(){};
+	LocalDriver(){
+		std::cout << "Local driver. Using SQlite: " << SQLITE_VERSION << std::endl;
+	};
 	~LocalDriver(){};
 	bool IsEnabled(){
 		return true; // Always true because local storage always works
@@ -28,10 +31,15 @@ public:
 		cat3.name="Categoria TONTA";
 		cat3.uuid="local-3";
 
+		Category cat4;
+		cat4.name="SQLite";
+		cat4.uuid="local-4";
+
 		std::vector<Category> vector;
 		vector.push_back(cat1);
 		vector.push_back(cat2);
 		vector.push_back(cat3);
+		vector.push_back(cat4);
 
 		return vector;
 	}
