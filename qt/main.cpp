@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QQuickItem>
 #include <QQmlContext>
-#include <QVector.h>
+#include <qvector.h>
 #include "../core/MagnasTareas.hpp"
 
 #ifdef WIN32
