@@ -4,8 +4,8 @@
 
 #include "sqlite3.h"
 #include "../core/MagnasTareasDriver.hpp"
-#include "Task.hpp"
-#include "Category.hpp"
+#include "../core/Task.hpp"
+#include "../core/Category.hpp"
 #include <iostream>
 
 class LocalDriver : public MagnasTareasDriver {
