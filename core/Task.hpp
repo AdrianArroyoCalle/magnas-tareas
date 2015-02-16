@@ -4,7 +4,7 @@
 typedef struct{
 	std::string name;
 	std::string description;
-	DriverName driverName;
+	std::string uuid;
 	bool completed;
 } Task;
 

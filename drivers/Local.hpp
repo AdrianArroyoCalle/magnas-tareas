@@ -4,6 +4,8 @@
 
 #include "sqlite3.h"
 #include "../core/MagnasTareasDriver.hpp"
+#include "Task.hpp"
+#include "Category.hpp"
 #include <iostream>
 
 class LocalDriver : public MagnasTareasDriver {
@@ -34,6 +36,13 @@ public:
 		Category cat4;
 		cat4.name="SQLite";
 		cat4.uuid="local-4";
+
+		Task task1;
+		task1.name="MagnasTareas 001";
+		task1.description="Cargar tareas desde las categorias";
+		task1.completed=false;
+		task1.uuid="local-1";
+		cat4.tasks.push_back(task1);
 
 		std::vector<Category> vector;
 		vector.push_back(cat1);

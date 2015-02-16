@@ -30,6 +30,10 @@ ApplicationWindow {
 	ListModel{
 		id: categoryModel
 	}
+
+	ListModel{
+		id: taskModel
+	}
     
     ColumnLayout{
 		spacing: 6
@@ -85,12 +89,18 @@ ApplicationWindow {
 				}
 				model: categoryModel
 				delegate: Text {
+					property variant myData: model
 					text: name
 					font.pixelSize: 15
 
 					MouseArea {
 						anchors.fill: parent
-						onClicked: categories.currentIndex = index
+						onClicked: {
+							categories.currentIndex = index
+							console.log("Tasks for: "+categories.currentItem.myData.uuid)
+							taskModel.clear()
+							MagnasTareas.getTasksFor(categories.currentItem.myData.uuid)
+						}
 					}
 				}
 				highlight: Rectangle {
@@ -115,18 +125,9 @@ ApplicationWindow {
 				footer: Text{
 					text: "Tasks: <b>" + tasks.count + "</b>" 
 				}
-				model: ListModel{
-					id: taskModel
-					ListElement{
-						name: "Tareas Smith"
-						uuid: "local-1"
-					}
-					ListElement{
-						name: "Soporte básico de lectura"
-						uuid: "local-2"
-					}
-				}
+				model: taskModel
 				delegate: Text {
+					id: taskDelegate
 					property variant myData: model
 					text: name
 					font.pixelSize: 15
@@ -135,9 +136,8 @@ ApplicationWindow {
 						anchors.fill: parent
 						onClicked: {
 							tasks.currentIndex = index
-							//tasks.selectTask(index)
 							taskTitle.text=tasks.currentItem.myData.name
-							taskContent.text=MagnasTareas.readTask(tasks.currentItem.myData.uuid)
+							taskContent.text=tasks.currentItem.myData.description
 						}
 					}
 				}
@@ -187,6 +187,10 @@ ApplicationWindow {
 		categoryModel.append({"name": name, "uuid": uuid})
 	}
 	function refresh(){
+		categoryModel.clear()
 		MagnasTareas.getCategories()
+	}
+	function addVisualTask(name,description,uuid,completed) {
+		taskModel.append({"name": name, "description" : description, "uuid": uuid, "completed": completed})
 	}
 }

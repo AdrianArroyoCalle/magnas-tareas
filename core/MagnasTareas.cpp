@@ -1,12 +1,15 @@
 #include "MagnasTareas.hpp"
 #include "../drivers/Local.hpp"
 #include <iostream>
+#include <Windows.h>
+#include <winhttp.h>
+#include "curl/curl.h"
 
 MagnasTareas::MagnasTareas()
 {
 	//Load Drivers
 	localDriver=new LocalDriver();
-
+	curl_global_init(CURL_GLOBAL_ALL);
 }
 
 MagnasTareas::~MagnasTareas()

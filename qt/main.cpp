@@ -48,6 +48,31 @@ class MagnasTareasQt : public QObject, MagnasTareas
 			QMetaObject::invokeMethod(window, "addVisualCategory",Q_RETURN_ARG(QVariant, returnedValue),Q_ARG(QVariant, name),Q_ARG(QVariant,uuid));
 		}
 	}
+	void getTasksFor(const QString& uuid) {
+		std::vector<Category> categories=this->GetCategories();
+
+		std::vector<Category>::iterator it=categories.begin();
+		while(it != categories.end())
+		{
+			if(QString::fromStdString(it->uuid)==uuid)
+			{
+				//READ AND SEND TASKS
+				std::vector<Task> tasks=it->tasks;
+				std::vector<Task>::iterator itr=tasks.begin();
+				while(itr != tasks.end())
+				{
+					QVariant name=QString::fromStdString(itr->name);
+					QVariant description=QString::fromStdString(itr->description);
+					QVariant completed=itr->completed;
+					QVariant uuid=QString::fromStdString(itr->uuid);
+					QVariant rtn;
+					QMetaObject::invokeMethod(window,"addVisualTask",Q_RETURN_ARG(QVariant, rtn),Q_ARG(QVariant,name),Q_ARG(QVariant,description),Q_ARG(QVariant,uuid),Q_ARG(QVariant,completed));
+					itr++;
+				}
+			}
+			it++;
+		}
+	}
 		
  };
 
