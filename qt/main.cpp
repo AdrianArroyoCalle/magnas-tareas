@@ -6,7 +6,7 @@
 #include <qvector.h>
 #include "../core/MagnasTareas.hpp"
 
-#ifdef WIN32
+#if defined(WIN32) && !defined(_DEBUG)
 #pragma comment(linker, "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
 #endif
 
