@@ -81,11 +81,12 @@ ApplicationWindow {
 					font.pixelSize: 20
 				}
 				footer: Text{
-					text: "Categories: <b>" + categories.count + "</b>" 
+					text: "Categories: <b>" + categories.count + "</b>"
 				}
 				model: categoryModel
 				delegate: Text {
 					text: name
+					font.pixelSize: 15
 
 					MouseArea {
 						anchors.fill: parent
@@ -128,6 +129,7 @@ ApplicationWindow {
 				delegate: Text {
 					property variant myData: model
 					text: name
+					font.pixelSize: 15
 
 					MouseArea {
 						anchors.fill: parent
