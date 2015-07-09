@@ -5,6 +5,10 @@ import QtQuick.Dialogs 1.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls.Styles 1.1
 
+/*
+QtQuick.Controls 1.4 implementa TextArea, que SI tiene SCROLL
+*/
+
 ApplicationWindow {
     title: qsTr("Magnas Tareas")
     width: 800
@@ -52,6 +56,11 @@ ApplicationWindow {
 				text: qsTr("New task") //TODO - Put 64x64 icons
 				height: parent.height
 				style: ui_button
+				onClicked: {
+					var dialog=Qt.createComponent("qrc:/add.qml").createObject(parent,{});
+					add_connection.target=dialog;
+					dialog.show();
+				}
 			}
 			Button {
 				text: qsTr("New category")
@@ -182,6 +191,14 @@ ApplicationWindow {
 
 		}
 	}
+	Connections{
+		id: add_connection
+		onVisibleChanged: {
+			if(!target.visible)
+				MagnasTareas.addTask(target.task_title,target.task_description,target.task_category);
+		}
+	}
+	
 	function addVisualCategory(name,uuid){
 		console.log("Adding "+name)
 		categoryModel.append({"name": name, "uuid": uuid})

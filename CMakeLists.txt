@@ -19,3 +19,10 @@ qt5_add_resources(RES_SRC "${CMAKE_CURRENT_SOURCE_DIR}/qt/qml/qml.qrc")
 ADD_EXECUTABLE(MagnasTareas ${QT_SRC} ${CORE_SRC} ${DRIVERS_SRC} ${RES_SRC})
 
 qt5_use_modules(MagnasTareas Widgets Qml Quick)
+
+ADD_SUBDIRECTORY(sqlite3)
+INCLUDE_DIRECTORIES(sqlite3)
+TARGET_LINK_LIBRARIES(MagnasTareas sqlite3)
+IF(NOT WIN32)
+	TARGET_LINK_LIBRARIES(MagnasTareas pthread dl)
+ENDIF()

@@ -73,6 +73,9 @@ class MagnasTareasQt : public QObject, MagnasTareas
 			it++;
 		}
 	}
+	void addTask(const QString& title, const QString& description, const QString& category){
+		qDebug() << "Saving task: " << title;
+	}
 		
  };
 
