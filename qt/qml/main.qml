@@ -63,7 +63,7 @@ ApplicationWindow {
 				}
 			}
 			Button {
-				text: qsTr("New category")
+				text: qsTr("Remove task")
 				height: parent.height
 				style: ui_button
 			}
@@ -194,8 +194,10 @@ ApplicationWindow {
 	Connections{
 		id: add_connection
 		onVisibleChanged: {
-			if(!target.visible)
-				MagnasTareas.addTask(target.task_title,target.task_description,target.task_category);
+			if(!target.visible){
+				MagnasTareas.addTask(target.task_title,target.task_description,target.task_category,target.task_category_name);
+				refresh();
+			}
 		}
 	}
 	

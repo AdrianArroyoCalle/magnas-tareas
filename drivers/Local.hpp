@@ -10,6 +10,8 @@
 #include <cstdlib>
 #include <cstring>
 
+extern std::string newUUID();
+
 class LocalDriver : public MagnasTareasDriver {
 public:
 	LocalDriver(){
@@ -74,6 +76,23 @@ public:
 		}
 
 		return categories;
+	}
+	void AddTask(std::string title, std::string description, std::string category, std::string preparedCategoryName){
+		std::string search="SELECT CATEGORY FROM MagnasTareas WHERE CATEGORY_UUID='"+category+"';";
+		sqlite3_stmt* next;
+		std::cout << "SAVING IN SQLITE " << title << std::endl;
+		if(sqlite3_prepare(db,search.c_str(),std::strlen(search.c_str()),&next,0)==SQLITE_OK){
+			if(sqlite3_step(next)==SQLITE_ROW){
+				std::string categoryName=reinterpret_cast<const char*>(sqlite3_column_text(next,0));
+				std::cout << "Category UUID: " << categoryName << std::endl;
+				std::string sentence="INSERT INTO MagnasTareas VALUES('"+title+"','"+newUUID()+"','"+description+"','"+categoryName+"','"+category+"',0);";
+				sqlite3_exec(db,sentence.c_str(),0,0,0);
+				std::cout << "Finished" << std::endl;
+			}else{
+				std::string sentence="INSERT INTO MagnasTareas VALUES('"+title+"','"+newUUID()+"','"+description+"','"+preparedCategoryName+"','"+category+"',0);";
+				sqlite3_exec(db,sentence.c_str(),0,0,0);
+			}
+		}
 	}
 private:
 	sqlite3* db;

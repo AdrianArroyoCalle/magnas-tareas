@@ -32,3 +32,9 @@ std::vector<Category> MagnasTareas::GetCategories()
 	}
 	return vector;
 }
+
+void MagnasTareas::AddTask(std::string title, std::string description, std::string category, std::string categoryName)
+{
+	if(localDriver->IsEnabled())
+		localDriver->AddTask(title,description,category,categoryName);
+}

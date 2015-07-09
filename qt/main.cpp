@@ -6,6 +6,37 @@
 #include <qvector.h>
 #include "../core/MagnasTareas.hpp"
 
+extern "C"
+{
+#ifdef WIN32
+#include <Rpc.h>
+#else
+#include <uuid/uuid.h>
+#endif
+}
+
+std::string newUUID()
+{
+#ifdef WIN32
+    UUID uuid;
+    UuidCreate ( &uuid );
+
+    unsigned char * str;
+    UuidToStringA ( &uuid, &str );
+
+    std::string s( ( char* ) str );
+
+    RpcStringFreeA ( &str );
+#else
+    uuid_t uuid;
+    uuid_generate_random ( uuid );
+    char s[37];
+    uuid_unparse ( uuid, s );
+#endif
+    return s;
+}
+
+
 #if defined(WIN32) && !defined(_DEBUG)
 #pragma comment(linker, "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
 #endif
@@ -29,10 +60,12 @@ class MagnasTareasQt : public QObject, MagnasTareas
 			qDebug() << "UUID: " << uuid;
 			return "Contenido de la tarea, implementar un Core Universal que sea posible usar con muchos drivers de APIs REST"; 
 	}
+	
 	QString getVersion(void)
 	{
 		return QString::fromStdString(this->GetVersion());
 	}
+	
 	void getCategories(void)
 	{
 		std::vector<Category> categories=this->GetCategories();
@@ -48,6 +81,22 @@ class MagnasTareasQt : public QObject, MagnasTareas
 			QMetaObject::invokeMethod(window, "addVisualCategory",Q_RETURN_ARG(QVariant, returnedValue),Q_ARG(QVariant, name),Q_ARG(QVariant,uuid));
 		}
 	}
+	
+	QVariantList getCategoriesOnly(void){
+		QVariantList list;
+		std::vector<Category> categories=this->GetCategories();
+		QVector<Category> qvector=QVector<Category>::fromStdVector(categories);
+		QList<Category> qlist=QList<Category>::fromVector(qvector);
+		for( int i=0; i<qlist.count(); ++i )
+		{
+			QVariantMap map;
+			map.insert("name",QString::fromStdString(qlist[i].name));
+			map.insert("uuid",QString::fromStdString(qlist[i].uuid));
+			list << map;
+		}
+		return list;
+	}
+	
 	void getTasksFor(const QString& uuid) {
 		std::vector<Category> categories=this->GetCategories();
 
@@ -73,8 +122,8 @@ class MagnasTareasQt : public QObject, MagnasTareas
 			it++;
 		}
 	}
-	void addTask(const QString& title, const QString& description, const QString& category){
-		qDebug() << "Saving task: " << title;
+	void addTask(const QString& title, const QString& description, const QString& category, const QString& categoryName){
+		this->AddTask(title.toStdString(),description.toStdString(),category.toStdString(),categoryName.toStdString());
 	}
 		
  };
