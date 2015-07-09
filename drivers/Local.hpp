@@ -35,6 +35,9 @@ public:
 			std::cerr << "Error while creating the database table" << std::endl;
 		}
 		
+		std::string sentence="INSERT INTO MagnasTareas VALUES('Welcome to Magnas Tareas','welcome-1','Welcome to Magnas Tareas. Start using it by adding new tasks','Help','help-1',0);";
+		sqlite3_exec(db,sentence.c_str(),0,0,0);
+		
 		
 		
 		
@@ -77,6 +80,7 @@ public:
 
 		return categories;
 	}
+	
 	void AddTask(std::string title, std::string description, std::string category, std::string preparedCategoryName){
 		std::string search="SELECT CATEGORY FROM MagnasTareas WHERE CATEGORY_UUID='"+category+"';";
 		sqlite3_stmt* next;
@@ -93,6 +97,11 @@ public:
 				sqlite3_exec(db,sentence.c_str(),0,0,0);
 			}
 		}
+	}
+	
+	void RemoveTask(std::string uuid){
+		std::string sentence="DELETE FROM MagnasTareas WHERE UUID='"+uuid+"';";
+		sqlite3_exec(db,sentence.c_str(),0,0,0);
 	}
 private:
 	sqlite3* db;

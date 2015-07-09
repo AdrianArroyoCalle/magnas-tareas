@@ -125,6 +125,10 @@ class MagnasTareasQt : public QObject, MagnasTareas
 	void addTask(const QString& title, const QString& description, const QString& category, const QString& categoryName){
 		this->AddTask(title.toStdString(),description.toStdString(),category.toStdString(),categoryName.toStdString());
 	}
+	
+	void removeTask(const QString& uuid){
+		this->RemoveTask(uuid.toStdString());
+	}
 		
  };
 

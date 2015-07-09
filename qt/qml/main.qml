@@ -66,6 +66,10 @@ ApplicationWindow {
 				text: qsTr("Remove task")
 				height: parent.height
 				style: ui_button
+				onClicked: {
+					MagnasTareas.removeTask(tasks.currentItem.myData.uuid);
+					refresh();
+				}
 			}
 			Button {
 				text: qsTr("Sync")
@@ -194,7 +198,7 @@ ApplicationWindow {
 	Connections{
 		id: add_connection
 		onVisibleChanged: {
-			if(!target.visible){
+			if(!target.visible && target.task_title!= "" && target.task_description != "" && target.task_category!="" && target.task_category_name!= ""){
 				MagnasTareas.addTask(target.task_title,target.task_description,target.task_category,target.task_category_name);
 				refresh();
 			}

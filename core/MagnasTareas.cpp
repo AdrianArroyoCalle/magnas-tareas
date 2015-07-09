@@ -38,3 +38,9 @@ void MagnasTareas::AddTask(std::string title, std::string description, std::stri
 	if(localDriver->IsEnabled())
 		localDriver->AddTask(title,description,category,categoryName);
 }
+
+void MagnasTareas::RemoveTask(std::string uuid)
+{
+	if(localDriver->IsEnabled())
+		localDriver->RemoveTask(uuid);
+}
