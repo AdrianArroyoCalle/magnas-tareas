@@ -7,7 +7,7 @@ before_install:
  - sudo add-apt-repository --yes ppa:beineri/opt-qt541
  - sudo apt-get update
 install:
- - sudo apt-get install g++-4.8 libc6-i386 qt54tools qt54declarative qt54quick1 qt54quickcontrols
+ - sudo apt-get install g++-4.8 libc6-i386 qt54tools qt54declarative qt54quick1 qt54quickcontrols uuid-dev
  - export CXX="g++-4.8"
  - export CC="gcc-4.8"
  - wget http://www.cmake.org/files/v3.2/cmake-3.2.3-Linux-i386.tar.gz
