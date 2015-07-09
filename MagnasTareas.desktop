@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Magnas Tareas
+Comment=Easy, fast and beautiful task manager
+Comment[es]=Gestor de tareas fácil, rápido y bonito
+Exec=MagnasTareas
+Icon=/usr/share/pixmaps/MagnasTareas.png
+Terminal=false
+Categories=Utility;Qt;
