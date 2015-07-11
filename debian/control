@@ -2,7 +2,7 @@ Source: magnas-tareas
 Section: misc
 Priority: optional
 Maintainer: Adrián Arroyo <adrian.arroyocalle@gmail.com>
-Build-Depends: debhelper (>= 8.0.0), cmake, uuid-dev, qtquick1-5-dev, qtquick1-5-qml-plugins, qtdeclarative5-window-plugin, qtdeclarative5-dev, qtbase5-dev
+Build-Depends: debhelper (>= 8.0.0), cmake, uuid-dev, qtquick1-5-dev, qtdeclarative5-dev, qtbase5-dev
 Standards-Version: 3.9.4
 Homepage: http://github.com/AdrianArroyoCalle/magnas-tareas
 #Vcs-Git: git://git.debian.org/collab-maint/magnas-tareas.git
