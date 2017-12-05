@@ -28,3 +28,13 @@ The app is divided in a C++ core, a GUI frontend and multiple tasks backends
  * Hiveminder
  * Nozbe
  * Toodledo
+
+# BUILD
+
+```
+(sudo apt install qtbase5-dev qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-dialogs)
+mkdir build
+cd build
+cmake ..
+make
+```
